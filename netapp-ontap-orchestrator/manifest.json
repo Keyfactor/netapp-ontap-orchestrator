@@ -1,0 +1,30 @@
+{
+  "extensions": {
+    "Keyfactor.Orchestrators.Extensions.IOrchestratorJobExtension": {
+      "CertStores.ONTAP_CERTS.Inventory": {
+        "assemblypath": "NetAppOntapOrchestrator.dll",
+        "TypeFullName": "Keyfactor.Extensions.Orchestrators.NetAppOntap.Jobs.Inventory"
+      },
+      "CertStores.ONTAP_CERTS.Management": {
+        "assemblypath": "NetAppOntapOrchestrator.dll",
+        "TypeFullName": "Keyfactor.Extensions.Orchestrators.NetAppOntap.Jobs.Management"
+      },
+      "CertStores.ONTAP_CERTS.Discovery": {
+        "assemblypath": "NetAppOntapOrchestrator.dll",
+        "TypeFullName": "Keyfactor.Extensions.Orchestrators.NetAppOntap.Jobs.Discovery"
+      },
+      "CertStores.ONTAP_TRUSTED.Inventory": {
+        "assemblypath": "NetAppOntapOrchestrator.dll",
+        "TypeFullName": "Keyfactor.Extensions.Orchestrators.NetAppOntap.Jobs.Inventory"
+      },
+      "CertStores.ONTAP_TRUSTED.Management": {
+        "assemblypath": "NetAppOntapOrchestrator.dll",
+        "TypeFullName": "Keyfactor.Extensions.Orchestrators.NetAppOntap.Jobs.Management"
+      },
+      "CertStores.ONTAP_TRUSTED.Discovery": {
+        "assemblypath": "NetAppOntapOrchestrator.dll",
+        "TypeFullName": "Keyfactor.Extensions.Orchestrators.NetAppOntap.Jobs.Discovery"
+      }
+    }
+  }
+}

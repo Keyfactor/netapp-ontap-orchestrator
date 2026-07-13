@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37411.7
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "netapp-ontap-orchestrator", "netapp-ontap-orchestrator\netapp-ontap-orchestrator.csproj", "{D1B8A6C0-B7CF-4BE3-ABF4-8293F79C53D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "netapp-ontap-orchestrator.Tests", "netapp-ontap-orchestrator.Tests\netapp-ontap-orchestrator.Tests.csproj", "{B2E7F3A1-9C4D-4E58-A6F0-1D3C7B9E204A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+	ProjectSection(SolutionItems) = preProject
+		docsource\content.md = docsource\content.md
+		docsource\ontap_certs.md = docsource\ontap_certs.md
+		docsource\ontap_trusted.md = docsource\ontap_trusted.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D1B8A6C0-B7CF-4BE3-ABF4-8293F79C53D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1B8A6C0-B7CF-4BE3-ABF4-8293F79C53D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1B8A6C0-B7CF-4BE3-ABF4-8293F79C53D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1B8A6C0-B7CF-4BE3-ABF4-8293F79C53D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2E7F3A1-9C4D-4E58-A6F0-1D3C7B9E204A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2E7F3A1-9C4D-4E58-A6F0-1D3C7B9E204A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2E7F3A1-9C4D-4E58-A6F0-1D3C7B9E204A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2E7F3A1-9C4D-4E58-A6F0-1D3C7B9E204A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AFDF0720-FEDC-47EA-88F9-645FE164B8E4}
+	EndGlobalSection
+EndGlobal

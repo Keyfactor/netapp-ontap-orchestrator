@@ -1,0 +1,133 @@
+{
+  "$schema": "https://keyfactor.github.io/v2/integration-manifest-schema.json",
+  "description": "This orchestrator extension manages certificates on NetApp ONTAP clusters and storage VMs (SVMs) via the ONTAP REST API.",
+  "integration_type": "orchestrator",
+  "link_github": false,
+  "name": "NetApp ONTAP",
+  "release_dir": "netapp-ontap-orchestrator/bin/Release",
+  "release_project": "netapp-ontap-orchestrator/netapp-ontap-orchestrator.csproj",
+  "status": "prototype",
+  "support_level": "community",
+  "update_catalog": false,
+
+  "about": {
+    "orchestrator": {
+      "UOFramework": "10.4",
+      "keyfactor_platform_version": "11",
+      "pam_support": true,
+
+      "store_types": [
+        {
+          "Name": "NetApp ONTAP Certificates",
+          "ShortName": "ONTAP_CERTS",
+          "Capability": "ONTAP_CERTS",
+          "LocalStore": false,
+          "SupportedOperations": {
+            "Add": true,
+            "Create": false,
+            "Discovery": true,
+            "Enrollment": false,
+            "Remove": true
+          },
+          "Properties": [
+            {
+              "Name": "IgnoreSSLWarning",
+              "DisplayName": "Ignore SSL Warning",
+              "Type": "Bool",
+              "DependsOn": "",
+              "DefaultValue": "false",
+              "Required": false,
+              "IsPAMEligible": false,
+              "Description": "When enabled, TLS certificate validation is skipped when connecting to the ONTAP management endpoint. Useful for lab clusters and the ONTAP Simulator, which present a self-signed certificate. Leave disabled for production clusters that present a trusted certificate."
+            }
+          ],
+          "EntryParameters": [
+            {
+              "Name": "CertType",
+              "DisplayName": "Certificate Type",
+              "Description": "The ONTAP certificate 'type' to install this entry as. 'server' installs a certificate + private key used by ONTAP acting as an SSL server; 'client' installs a certificate + private key used by ONTAP acting as an SSL client. Required when adding a certificate.",
+              "Type": "MultipleChoice",
+              "Options": "server,client",
+              "RequiredWhen": {
+                "HasPrivateKey": false,
+                "OnAdd": true,
+                "OnRemove": false,
+                "OnReenrollment": false
+              },
+              "DefaultValue": "server"
+            }
+          ],
+          "PasswordOptions": {
+            "EntrySupported": false,
+            "StoreRequired": false,
+            "Style": "Default"
+          },
+          "StorePathType": "",
+          "StorePathValue": "",
+          "StorePathDescription": "Identifies the scope on the cluster whose certificates this store manages. Enter the name of a Storage VM (SVM), e.g. 'vs0', to manage that SVM's certificates, or the literal token '[cluster]' (square brackets included) to manage cluster-scoped certificates. The ClientMachine is the cluster management hostname or IP. Run the Discovery job to enumerate the available scopes.",
+          "PrivateKeyAllowed": "Required",
+          "JobProperties": [],
+          "ServerRequired": true,
+          "PowerShell": false,
+          "BlueprintAllowed": false,
+          "CustomAliasAllowed": "Required"
+        },
+        {
+          "Name": "NetApp ONTAP Trusted Roots",
+          "ShortName": "ONTAP_TRUSTED",
+          "Capability": "ONTAP_TRUSTED",
+          "LocalStore": false,
+          "SupportedOperations": {
+            "Add": true,
+            "Create": false,
+            "Discovery": true,
+            "Enrollment": false,
+            "Remove": true
+          },
+          "Properties": [
+            {
+              "Name": "IgnoreSSLWarning",
+              "DisplayName": "Ignore SSL Warning",
+              "Type": "Bool",
+              "DependsOn": "",
+              "DefaultValue": "false",
+              "Required": false,
+              "IsPAMEligible": false,
+              "Description": "When enabled, TLS certificate validation is skipped when connecting to the ONTAP management endpoint. Useful for lab clusters and the ONTAP Simulator, which present a self-signed certificate. Leave disabled for production clusters that present a trusted certificate."
+            }
+          ],
+          "EntryParameters": [
+            {
+              "Name": "CertType",
+              "DisplayName": "Certificate Type",
+              "Description": "The ONTAP trust-anchor 'type' to install this entry as. 'server_ca' is trusted by ONTAP acting as an SSL client to verify an external server; 'client_ca' is trusted by ONTAP acting as an SSL server to verify an incoming client certificate. Required when adding a certificate. Trust anchors are public certificates only; no private key is installed.",
+              "Type": "MultipleChoice",
+              "Options": "server_ca,client_ca",
+              "RequiredWhen": {
+                "HasPrivateKey": false,
+                "OnAdd": true,
+                "OnRemove": false,
+                "OnReenrollment": false
+              },
+              "DefaultValue": "server_ca"
+            }
+          ],
+          "PasswordOptions": {
+            "EntrySupported": false,
+            "StoreRequired": false,
+            "Style": "Default"
+          },
+          "StorePathType": "",
+          "StorePathValue": "",
+          "StorePathDescription": "Identifies the scope on the cluster whose trusted certificates this store manages. Enter the name of a Storage VM (SVM), e.g. 'vs0', to manage that SVM's trust anchors, or the literal token '[cluster]' (square brackets included) to manage cluster-scoped trust anchors. The ClientMachine is the cluster management hostname or IP. Run the Discovery job to enumerate the available scopes.",
+          "PrivateKeyAllowed": "Forbidden",
+          "JobProperties": [],
+          "ServerRequired": true,
+          "PowerShell": false,
+          "BlueprintAllowed": false,
+          "CustomAliasAllowed": "Required"
+        }
+      ]
+    }
+  }
+}
