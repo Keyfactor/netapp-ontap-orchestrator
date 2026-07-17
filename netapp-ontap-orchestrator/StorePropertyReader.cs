@@ -7,6 +7,7 @@
 //  and limitations under the License.
 
 using System;
+using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 
 namespace Keyfactor.Extensions.Orchestrators.NetAppOntap
@@ -44,6 +45,31 @@ namespace Keyfactor.Extensions.Orchestrators.NetAppOntap
                 // Malformed or unexpected Properties JSON: fail safe to false.
                 return false;
             }
+        }
+
+        /// <summary>
+        /// Reads a boolean from a Dictionary&lt;string, object&gt; (the shape of DiscoveryJobConfiguration.JobProperties).
+        /// Tolerant of the value being a bool, a "true"/"false" string, or null/missing.  Defaults to false.
+        /// </summary>
+        public static bool ReadBool(Dictionary<string, object> jobProperties, string name)
+        {
+            if (jobProperties == null) return false;
+
+            // Case-insensitive key lookup (Dictionary default is ordinal).
+            object raw = null;
+            foreach (var kvp in jobProperties)
+            {
+                if (string.Equals(kvp.Key, name, StringComparison.OrdinalIgnoreCase))
+                {
+                    raw = kvp.Value;
+                    break;
+                }
+            }
+            if (raw == null) return false;
+
+            if (raw is bool b) return b;
+
+            return bool.TryParse(raw.ToString(), out var parsed) && parsed;
         }
     }
 }
