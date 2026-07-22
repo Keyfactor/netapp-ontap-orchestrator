@@ -73,7 +73,7 @@ The **ClientMachine** value on the certificate store is the cluster management h
 
 > :warning: Use a dedicated, least-privilege service account rather than the built-in `admin` account. See [Authorization / permissions](#authorization--permissions).
 
-Lab clusters and the [ONTAP Simulator](https://mysupport.netapp.com) present a self-signed TLS certificate. For those environments, enable the **Ignore SSL Warning** custom field on the certificate store to skip TLS validation. Leave it disabled for production clusters that present a trusted certificate.
+Lab clusters and the [ONTAP Simulator](https://mysupport.netapp.com) present a self-signed TLS certificate. For those environments, enable the **Ignore SSL Warning** custom field on the certificate store (or the same-named job property on Discovery jobs) to skip TLS validation. Leave it disabled for production clusters that present a trusted certificate.
 
 ### Authorization / permissions
 
@@ -308,6 +308,7 @@ the Keyfactor Command Portal
    When enabled, TLS certificate validation is skipped when connecting to the ONTAP management endpoint. Useful for lab clusters and the ONTAP Simulator, which present a self-signed certificate. Leave disabled for production clusters that present a trusted certificate.
 
    ![ONTAP_CERTS Custom Field - IgnoreSSLWarning](docsource/images/ONTAP_CERTS-custom-field-IgnoreSSLWarning-dialog.svg)
+   ![ONTAP_CERTS Custom Field - IgnoreSSLWarning](docsource/images/ONTAP_CERTS-custom-field-IgnoreSSLWarning-validation-options-dialog.svg)
 
 
    ##### Entry Parameters Tab
@@ -323,6 +324,7 @@ the Keyfactor Command Portal
    The ONTAP certificate 'type' to install this entry as. 'server' installs a certificate + private key used by ONTAP acting as an SSL server; 'client' installs a certificate + private key used by ONTAP acting as an SSL client. Required when adding a certificate.
 
    ![ONTAP_CERTS Entry Parameter - CertType](docsource/images/ONTAP_CERTS-entry-parameters-store-type-dialog-CertType.svg)
+   ![ONTAP_CERTS Entry Parameter - CertType](docsource/images/ONTAP_CERTS-entry-parameters-store-type-dialog-CertType-validation-options.svg)
 
 
    </details>
@@ -519,6 +521,7 @@ the Keyfactor Command Portal
    When enabled, TLS certificate validation is skipped when connecting to the ONTAP management endpoint. Useful for lab clusters and the ONTAP Simulator, which present a self-signed certificate. Leave disabled for production clusters that present a trusted certificate.
 
    ![ONTAP_TRUSTED Custom Field - IgnoreSSLWarning](docsource/images/ONTAP_TRUSTED-custom-field-IgnoreSSLWarning-dialog.svg)
+   ![ONTAP_TRUSTED Custom Field - IgnoreSSLWarning](docsource/images/ONTAP_TRUSTED-custom-field-IgnoreSSLWarning-validation-options-dialog.svg)
 
 
    ##### Entry Parameters Tab
@@ -534,6 +537,7 @@ the Keyfactor Command Portal
    The ONTAP trust-anchor 'type' to install this entry as. 'server_ca' is trusted by ONTAP acting as an SSL client to verify an external server; 'client_ca' is trusted by ONTAP acting as an SSL server to verify an incoming client certificate. Required when adding a certificate. Trust anchors are public certificates only; no private key is installed.
 
    ![ONTAP_TRUSTED Entry Parameter - CertType](docsource/images/ONTAP_TRUSTED-entry-parameters-store-type-dialog-CertType.svg)
+   ![ONTAP_TRUSTED Entry Parameter - CertType](docsource/images/ONTAP_TRUSTED-entry-parameters-store-type-dialog-CertType-validation-options.svg)
 
 
    </details>
@@ -553,10 +557,11 @@ the Keyfactor Command Portal
    | Between `11.0.0` and `11.5.1` (inclusive) | `net8.0` | `Disable` | `net6.0` |
    | Between `11.0.0` and `11.5.1` (inclusive) | `net8.0` | `LatestMajor` | `net8.0` |
    | `11.6` _and_ newer | `net8.0` | | `net8.0` |
+   | `25.5` _and_ newer | `net10.0` | | `net10.0` |
 
     Unzip the archive containing extension assemblies to a known location.
 
-    > **Note** If you don't see an asset with a corresponding .NET version, you should always assume that it was compiled for `net8.0`.
+    > **Note** If you don't see an asset with a corresponding .NET version, you should always assume that it was compiled for `net10.0`.
 
 2. **Locate the Universal Orchestrator extensions directory.**
 

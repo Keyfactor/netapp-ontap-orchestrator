@@ -62,7 +62,16 @@ curl -s -X POST "https://${KEYFACTOR_HOSTNAME}/${KEYFACTOR_API_PATH}/Certificate
   "StorePathType": "",
   "StorePathValue": "",
   "PrivateKeyAllowed": "Required",
-  "JobProperties": [],
+  "JobProperties": [
+    {
+      "Name": "IgnoreSSLWarning",
+      "DisplayName": "Ignore SSL Warning",
+      "Type": "Bool",
+      "DefaultValue": "false",
+      "Required": false,
+      "Description": "When enabled on a Discovery job, TLS certificate validation is skipped when connecting to the ONTAP management endpoint. Useful for lab clusters and the ONTAP Simulator."
+    }
+  ],
   "ServerRequired": true,
   "PowerShell": false,
   "BlueprintAllowed": false,
@@ -122,7 +131,16 @@ curl -s -X POST "https://${KEYFACTOR_HOSTNAME}/${KEYFACTOR_API_PATH}/Certificate
   "StorePathType": "",
   "StorePathValue": "",
   "PrivateKeyAllowed": "Forbidden",
-  "JobProperties": [],
+  "JobProperties": [
+    {
+      "Name": "IgnoreSSLWarning",
+      "DisplayName": "Ignore SSL Warning",
+      "Type": "Bool",
+      "DefaultValue": "false",
+      "Required": false,
+      "Description": "When enabled on a Discovery job, TLS certificate validation is skipped when connecting to the ONTAP management endpoint. Useful for lab clusters and the ONTAP Simulator."
+    }
+  ],
   "ServerRequired": true,
   "PowerShell": false,
   "BlueprintAllowed": false,
