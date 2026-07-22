@@ -89,6 +89,22 @@ namespace Keyfactor.Extensions.Orchestrators.NetAppOntap.Jobs
             JobParameters.StoreProperties.ClusterManagementHost = config.ClientMachine;
             JobParameters.StoreProperties.Username = ResolvePamField("ServerUsername", config.ServerUsername);
             JobParameters.StoreProperties.Password = ResolvePamField("ServerPassword", config.ServerPassword);
+
+            // Discovery reads IgnoreSSLWarning from JobProperties (a Dictionary<string, object>)
+            // rather than from store Properties JSON, since no store exists yet at discovery time.
+            // Default to TRUE when the property is absent: Discovery only enumerates scopes (it never
+            // touches certificate material), and many Command versions don't surface Discovery job
+            // properties in the UI, so requiring the flag would silently block Discovery against any
+            // cluster with a self-signed management cert (the ONTAP default).  Inventory and Management
+            // remain secure-by-default (false) via the store-level IgnoreSSLWarning property.
+            var hasSslProp = config.JobProperties != null &&
+                config.JobProperties.ContainsKey(StorePropertyNames.IGNORE_SSL_WARNING);
+            JobParameters.StoreProperties.IgnoreSslWarning = hasSslProp
+                ? StorePropertyReader.ReadBool(config.JobProperties, StorePropertyNames.IGNORE_SSL_WARNING)
+                : true;
+            _logger.LogTrace($"IgnoreSslWarning = {JobParameters.StoreProperties.IgnoreSslWarning}" +
+                             (hasSslProp ? "" : " (defaulted — property not present in JobProperties)"));
+
             InitializeClient();
             _logger.MethodExit();
         }
