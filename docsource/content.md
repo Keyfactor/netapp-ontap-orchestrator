@@ -26,7 +26,7 @@ The **ClientMachine** value on the certificate store is the cluster management h
 
 > :warning: Use a dedicated, least-privilege service account rather than the built-in `admin` account. See [Authorization / permissions](#authorization--permissions).
 
-Lab clusters and the [ONTAP Simulator](https://mysupport.netapp.com) present a self-signed TLS certificate. For those environments, enable the **Ignore SSL Warning** custom field on the certificate store to skip TLS validation. Leave it disabled for production clusters that present a trusted certificate.
+Lab clusters and the [ONTAP Simulator](https://mysupport.netapp.com) present a self-signed TLS certificate. For those environments, enable the **Ignore SSL Warning** custom field on the certificate store (or the same-named job property on Discovery jobs) to skip TLS validation. Leave it disabled for production clusters that present a trusted certificate.
 
 ### Authorization / permissions
 

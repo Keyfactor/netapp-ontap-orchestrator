@@ -1,8 +1,12 @@
-// Copyright 2026 Keyfactor
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
 
+//  Copyright 2026 Keyfactor
+//  Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
+//  Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions
+//  and limitations under the License.
+
+using System.Collections.Generic;
 using FluentAssertions;
 using Xunit;
 
@@ -41,6 +45,49 @@ namespace Keyfactor.Extensions.Orchestrators.NetAppOntap.Tests
         public void ReadBool_NullEmptyOrMalformed_FailSafeToFalse(string json)
         {
             StorePropertyReader.ReadBool(json, Name).Should().BeFalse();
+        }
+
+        // ── Dictionary<string, object> overload (Discovery JobProperties) ──────
+
+        [Fact]
+        public void ReadBoolDict_BoolTrue_ReturnsTrue()
+        {
+            var dict = new Dictionary<string, object> { { "IgnoreSSLWarning", true } };
+            StorePropertyReader.ReadBool(dict, Name).Should().BeTrue();
+        }
+
+        [Fact]
+        public void ReadBoolDict_StringTrue_ReturnsTrue()
+        {
+            var dict = new Dictionary<string, object> { { "IgnoreSSLWarning", "true" } };
+            StorePropertyReader.ReadBool(dict, Name).Should().BeTrue();
+        }
+
+        [Fact]
+        public void ReadBoolDict_CaseInsensitiveKey_ReturnsTrue()
+        {
+            var dict = new Dictionary<string, object> { { "ignoresslwarning", true } };
+            StorePropertyReader.ReadBool(dict, Name).Should().BeTrue();
+        }
+
+        [Fact]
+        public void ReadBoolDict_False_ReturnsFalse()
+        {
+            var dict = new Dictionary<string, object> { { "IgnoreSSLWarning", false } };
+            StorePropertyReader.ReadBool(dict, Name).Should().BeFalse();
+        }
+
+        [Fact]
+        public void ReadBoolDict_Missing_ReturnsFalse()
+        {
+            var dict = new Dictionary<string, object> { { "SomethingElse", true } };
+            StorePropertyReader.ReadBool(dict, Name).Should().BeFalse();
+        }
+
+        [Fact]
+        public void ReadBoolDict_Null_ReturnsFalse()
+        {
+            StorePropertyReader.ReadBool((Dictionary<string, object>)null, Name).Should().BeFalse();
         }
     }
 }
